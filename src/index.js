@@ -1,4 +1,4 @@
-import { Scene, PerspectiveCamera, WebGLRenderer } from 'three';
+import { Scene, PerspectiveCamera, WebGLRenderer, Mesh, MeshBasicMaterial, SphereGeometry } from 'three';
 
 class KnowledgeGraph {
   constructor() {
@@ -10,7 +10,22 @@ class KnowledgeGraph {
       canvas: document.getElementById('root'),
     });
 
+    this.camera.position.z = 50;
     this.renderer.setSize(innerWidth, innerHeight);
+
+    this.scene.add(this.getSphere({ radius: 5 }));
+
+    this.renderer.render(this.scene, this.camera);
+  }
+
+  getSphere({ radius }) {
+    const geometry = new SphereGeometry(radius, 20, 20);
+    const material = new MeshBasicMaterial({
+      color: 0xffffff,
+      wireframe: true,
+    });
+
+    return new Mesh(geometry, material);
   }
 }
 
