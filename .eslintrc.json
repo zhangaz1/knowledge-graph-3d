@@ -3,5 +3,8 @@
     "browser": true
   },
   "parser": "babel-eslint",
-  "extends": "airbnb"
+  "extends": "airbnb",
+  "rules": {
+    "class-methods-use-this": 0
+  }
 }
