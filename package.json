@@ -1,0 +1,42 @@
+{
+  "name": "knowledge-graph-3d",
+  "version": "1.0.0",
+  "description": "3D knowledge graph using ThreeJS",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --open",
+    "watch": "webpack --progress --watch",
+    "build": "webpack --optimize-minimize"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaoli/knowledge-graph-3d.git"
+  },
+  "author": {
+    "name": "高力",
+    "email": "3071730@qq.com",
+    "url": "http://gaoli.me"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gaoli/knowledge-graph-3d/issues"
+  },
+  "homepage": "https://github.com/gaoli/knowledge-graph-3d#readme",
+  "dependencies": {
+    "three": "^0.89.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.3",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  }
+}
