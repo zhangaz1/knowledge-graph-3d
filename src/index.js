@@ -6,11 +6,11 @@ class KnowledgeGraph {
 
     this.scene = new Scene();
     this.camera = new PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
-    this.renderer = new WebGLRenderer();
+    this.renderer = new WebGLRenderer({
+      canvas: document.getElementById('root'),
+    });
 
     this.renderer.setSize(innerWidth, innerHeight);
-
-    document.body.appendChild(this.renderer.domElement);
   }
 }
 
