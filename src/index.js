@@ -1,5 +1,6 @@
 import * as d3 from 'd3-force-3d';
 import * as THREE from 'three';
+import OrbitControls from 'three-orbit-controls';
 
 import { nodes } from '../mock/data.json';
 
@@ -27,6 +28,13 @@ class KnowledgeGraph {
 
     // 设置画布大小
     this.renderer.setSize(innerWidth, innerHeight);
+
+    // 添加轨道控制
+    const controls = new (OrbitControls(THREE))(this.camera, this.renderer.domElement);
+
+    controls.addEventListener('change', () => {
+      this.renderer.render(this.scene, this.camera);
+    });
   }
 
   getSphere({ radius, color, position }) {
