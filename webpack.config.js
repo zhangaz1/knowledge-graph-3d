@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    vendor: ['three'],
+    vendor: ['d3-force-3d', 'three', 'three-orbit-controls'],
     bundle: path.resolve(__dirname, 'demo/src/index.js'),
   },
   module: {

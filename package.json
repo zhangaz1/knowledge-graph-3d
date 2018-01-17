@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/gaoli/knowledge-graph-3d#readme",
   "dependencies": {
-    "three": "^0.89.0"
+    "d3-force-3d": "^1.1.0",
+    "three": "^0.89.0",
+    "three-orbit-controls": "^82.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
