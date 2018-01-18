@@ -2,7 +2,7 @@ import * as d3 from 'd3-force-3d';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbit-controls';
 
-import { nodes } from '../mock/data.json';
+import { nodes, links } from '../mock/data.json';
 
 class KnowledgeGraph {
   nodes = [];
@@ -37,6 +37,18 @@ class KnowledgeGraph {
     });
   }
 
+  parseData() {
+    const simulation = d3.forceSimulation()
+      .numDimensions(3)
+      .force('link', d3.forceLink().id(d => d.id));
+
+    simulation.nodes(nodes);
+    simulation.force('link').links(links);
+
+    this.nodes = nodes;
+    this.links = links;
+  }
+
   getSphere({ radius, color, position }) {
     const { Mesh, MeshBasicMaterial, SphereGeometry } = THREE;
     const { x, y, z } = position;
@@ -54,10 +66,24 @@ class KnowledgeGraph {
     return sphere;
   }
 
-  parseData() {
-    const simulation = d3.forceSimulation().numDimensions(3).nodes(nodes);
+  getLine({ color, position }) {
+    const { Line, LineBasicMaterial, Geometry, Vector3 } = THREE;
 
-    this.nodes = simulation.nodes();
+    const geometry = new Geometry();
+    const material = new LineBasicMaterial({
+      color,
+    });
+
+    const [source, target] = position;
+
+    geometry.vertices.push(
+      new Vector3(source.x, source.y, source.z),
+      new Vector3(target.x, target.y, target.z),
+    );
+
+    const line = new Line(geometry, material);
+
+    return line;
   }
 
   startDraw() {
@@ -71,6 +97,17 @@ class KnowledgeGraph {
       });
 
       this.scene.add(sphere);
+    });
+
+    this.links.forEach((link) => {
+      const { source, target } = link;
+
+      const line = this.getLine({
+        color: 0xffffff,
+        position: [source, target],
+      });
+
+      this.scene.add(line);
     });
 
     this.renderer.render(this.scene, this.camera);
