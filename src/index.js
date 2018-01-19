@@ -6,6 +6,7 @@ import { nodes, links } from '../mock/data.json';
 
 class KnowledgeGraph {
   nodes = [];
+  lines = [];
 
   constructor() {
     this.init();
@@ -24,7 +25,7 @@ class KnowledgeGraph {
     });
 
     // 设置相机位置
-    this.camera.position.z = 50;
+    this.camera.position.z = 200;
 
     // 设置画布大小
     this.renderer.setSize(innerWidth, innerHeight);
@@ -37,23 +38,24 @@ class KnowledgeGraph {
     });
   }
 
-  parseData() {
-    const simulation = d3.forceSimulation()
-      .numDimensions(3)
-      .force('link', d3.forceLink().id(d => d.id));
+  drawLine = ({ color }) => {
+    const { Line, LineBasicMaterial, Geometry } = THREE;
 
-    simulation.nodes(nodes);
-    simulation.force('link').links(links);
+    const geometry = new Geometry();
+    const material = new LineBasicMaterial({
+      color,
+    });
 
-    this.nodes = nodes;
-    this.links = links;
+    const line = new Line(geometry, material);
+
+    this.scene.add(line);
+    this.lines.push(line);
   }
 
-  getSphere({ radius, color, position }) {
+  drawSphere = ({ color }) => {
     const { Mesh, MeshBasicMaterial, SphereGeometry } = THREE;
-    const { x, y, z } = position;
 
-    const geometry = new SphereGeometry(radius, 20, 20);
+    const geometry = new SphereGeometry(2.5, 10, 10);
     const material = new MeshBasicMaterial({
       color,
       wireframe: true,
@@ -61,56 +63,57 @@ class KnowledgeGraph {
 
     const sphere = new Mesh(geometry, material);
 
-    sphere.position.set(x, y, z);
-
-    return sphere;
+    this.scene.add(sphere);
+    this.nodes.push(sphere);
   }
 
-  getLine({ color, position }) {
-    const { Line, LineBasicMaterial, Geometry, Vector3 } = THREE;
+  handleTick = () => {
+    const { Vector3 } = THREE;
 
-    const geometry = new Geometry();
-    const material = new LineBasicMaterial({
-      color,
-    });
-
-    const [source, target] = position;
-
-    geometry.vertices.push(
-      new Vector3(source.x, source.y, source.z),
-      new Vector3(target.x, target.y, target.z),
-    );
-
-    const line = new Line(geometry, material);
-
-    return line;
-  }
-
-  startDraw() {
-    this.nodes.forEach((node) => {
+    nodes.forEach((node, idx) => {
       const { x, y, z } = node;
+      const sphere = this.nodes[idx];
 
-      const sphere = this.getSphere({
-        radius: 2,
-        color: 0xffffff,
-        position: { x, y, z },
-      });
-
-      this.scene.add(sphere);
+      sphere.position.set(x, y, z);
     });
 
-    this.links.forEach((link) => {
+    links.forEach((link, idx) => {
       const { source, target } = link;
+      const line = this.lines[idx];
 
-      const line = this.getLine({
-        color: 0xffffff,
-        position: [source, target],
-      });
-
-      this.scene.add(line);
+      line.geometry.verticesNeedUpdate = true;
+      line.geometry.vertices[0] = new Vector3(source.x, source.y, source.z);
+      line.geometry.vertices[1] = new Vector3(target.x, target.y, target.z);
     });
 
     this.renderer.render(this.scene, this.camera);
+  }
+
+  parseData() {
+    const simulation = d3.forceSimulation()
+      .numDimensions(3)
+      .force('link', d3.forceLink().id(d => d.id))
+      .force('center', d3.forceCenter())
+      .force('charge', d3.forceManyBody());
+
+    simulation.nodes(nodes);
+    simulation.force('link').links(links);
+
+    simulation.on('tick', this.handleTick);
+  }
+
+  startDraw() {
+    nodes.forEach(() => {
+      this.drawSphere({
+        color: 0xffffff,
+      });
+    });
+
+    links.forEach(() => {
+      this.drawLine({
+        color: 0xffffff,
+      });
+    });
   }
 }
 
