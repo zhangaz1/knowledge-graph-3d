@@ -1,59 +1,586 @@
 {
-  "nodes": [
-    {
-      "id": "红酒",
-      "group": 1
-    }, {
-      "id": "产地",
-      "group": 2
-    }, {
-      "id": "分类",
-      "group": 3
-    }, {
-      "id": "甜度",
-      "group": 4
-    }, {
-      "id": "特性",
-      "group": 5
-    }, {
-      "id": "容量",
-      "group": 6
-    }, {
-      "id": "葡萄品种",
-      "group": 7
-    }, {
-      "id": "类型",
-      "group": 8
-    }, {
-      "id": "酸度",
-      "group": 9
-    }
-  ],
-  "links": [
-    {
-      "source": "产地",
-      "target": "红酒"
-    }, {
-      "source": "分类",
-      "target": "红酒"
-    }, {
-      "source": "甜度",
-      "target": "红酒"
-    }, {
-      "source": "特性",
-      "target": "红酒"
-    }, {
-      "source": "容量",
-      "target": "红酒"
-    }, {
-      "source": "葡萄品种",
-      "target": "红酒"
-    }, {
-      "source": "类型",
-      "target": "红酒"
-    }, {
-      "source": "酸度",
-      "target": "红酒"
-    }
-  ]
+    "nodes":[
+        {
+            "id":"红酒",
+            "group":1
+        },
+        {
+            "id":"产地",
+            "group":2
+        },
+        {
+            "id":"分类",
+            "group":3
+        },
+        {
+            "id":"甜度",
+            "group":4
+        },
+        {
+            "id":"特性",
+            "group":5
+        },
+        {
+            "id":"容量",
+            "group":6
+        },
+        {
+            "id":"葡萄品种",
+            "group":7
+        },
+        {
+            "id":"类型",
+            "group":8
+        },
+        {
+            "id":"酸度",
+            "group":9
+        },
+        {
+            "id":"法国",
+            "group":2
+        },
+        {
+            "id":"澳大利亚",
+            "group":2
+        },
+        {
+            "id":"美国",
+            "group":2
+        },
+        {
+            "id":"葡萄牙",
+            "group":2
+        },
+        {
+            "id":"西班牙",
+            "group":2
+        },
+        {
+            "id":"阿根廷",
+            "group":2
+        },
+        {
+            "id":"中国",
+            "group":2
+        },
+        {
+            "id":"加拿大",
+            "group":2
+        },
+        {
+            "id":"南非",
+            "group":2
+        },
+        {
+            "id":"德国",
+            "group":2
+        },
+        {
+            "id":"意大利",
+            "group":2
+        },
+        {
+            "id":"新西兰",
+            "group":2
+        },
+        {
+            "id":"智利",
+            "group":2
+        },
+        {
+            "id":"红葡萄酒",
+            "group":3
+        },
+        {
+            "id":"白葡萄酒",
+            "group":3
+        },
+        {
+            "id":"桃红葡萄酒",
+            "group":3
+        },
+        {
+            "id":"果酒",
+            "group":3
+        },
+        {
+            "id":"香槟",
+            "group":3
+        },
+        {
+            "id":"起泡酒",
+            "group":3
+        },
+        {
+            "id":"冰酒/贵腐/甜酒",
+            "group":3
+        },
+        {
+            "id":"半干型",
+            "group":4
+        },
+        {
+            "id":"半甜型",
+            "group":4
+        },
+        {
+            "id":"干型",
+            "group":4
+        },
+        {
+            "id":"极干型",
+            "group":4
+        },
+        {
+            "id":"甜型",
+            "group":4
+        },
+        {
+            "id":"酒杯/酒具",
+            "group":5
+        },
+        {
+            "id":"礼盒馈赠",
+            "group":5
+        },
+        {
+            "id":"海外直采",
+            "group":5
+        },
+        {
+            "id":"列级庄",
+            "group":5
+        },
+        {
+            "id":"中级庄",
+            "group":5
+        },
+        {
+            "id":"100-375ml",
+            "group":6
+        },
+        {
+            "id":"376ml-750ml",
+            "group":6
+        },
+        {
+            "id":"750ml以上",
+            "group":6
+        },
+        {
+            "id":"黑皮诺（Pinot Noir）",
+            "group":7
+        },
+        {
+            "id":"麝香(Muscat)",
+            "group":7
+        },
+        {
+            "id":"马尔贝克（Malbec）",
+            "group":7
+        },
+        {
+            "id":"霞多丽（Chardonnay）",
+            "group":7
+        },
+        {
+            "id":"雷司令（Riesling）",
+            "group":7
+        },
+        {
+            "id":"长相思（Sauvignon Blanc）",
+            "group":7
+        },
+        {
+            "id":"赤霞珠（Cabernet Sauvignon）",
+            "group":7
+        },
+        {
+            "id":"赛美蓉(Semillon)",
+            "group":7
+        },
+        {
+            "id":"西拉/设拉子（Syrah/Shiraz）",
+            "group":7
+        },
+        {
+            "id":"蛇龙珠（Cabernet Gernischet）",
+            "group":7
+        },
+        {
+            "id":"莫斯卡托(Moscato)",
+            "group":7
+        },
+        {
+            "id":"皮诺塔吉（Pinotage）",
+            "group":7
+        },
+        {
+            "id":"白诗南(Chenin Blanc)",
+            "group":7
+        },
+        {
+            "id":"灰皮诺(Pinot Gris)",
+            "group":7
+        },
+        {
+            "id":"混合(Blending)",
+            "group":7
+        },
+        {
+            "id":"歌海娜（Grenache）",
+            "group":7
+        },
+        {
+            "id":"梅洛（Merlot）",
+            "group":7
+        },
+        {
+            "id":"桑娇维塞（Sangiovese）",
+            "group":7
+        },
+        {
+            "id":"天帕尼罗(Tempranillo)",
+            "group":7
+        },
+        {
+            "id":"品丽珠（Cabernet Franc）",
+            "group":7
+        },
+        {
+            "id":"内比奥罗（Nebbiolo）",
+            "group":7
+        },
+        {
+            "id":"佳美（Gamay）",
+            "group":7
+        },
+        {
+            "id":"佳美娜（Carmenere）",
+            "group":7
+        },
+        {
+            "id":"仙粉黛（Zinfandel）",
+            "group":7
+        },
+        {
+            "id":"低泡酒",
+            "group":8
+        },
+        {
+            "id":"无醇酒",
+            "group":8
+        },
+        {
+            "id":"静止酒",
+            "group":8
+        },
+        {
+            "id":"高泡酒",
+            "group":8
+        },
+        {
+            "id":"中酸",
+            "group":9
+        },
+        {
+            "id":"低酸",
+            "group":9
+        },
+        {
+            "id":"高酸",
+            "group":9
+        }
+    ],
+    "links":[
+        {
+            "source":"产地",
+            "target":"红酒"
+        },
+        {
+            "source":"分类",
+            "target":"红酒"
+        },
+        {
+            "source":"甜度",
+            "target":"红酒"
+        },
+        {
+            "source":"特性",
+            "target":"红酒"
+        },
+        {
+            "source":"容量",
+            "target":"红酒"
+        },
+        {
+            "source":"葡萄品种",
+            "target":"红酒"
+        },
+        {
+            "source":"类型",
+            "target":"红酒"
+        },
+        {
+            "source":"酸度",
+            "target":"红酒"
+        },
+        {
+            "source":"法国",
+            "target":"产地"
+        },
+        {
+            "source":"澳大利亚",
+            "target":"产地"
+        },
+        {
+            "source":"美国",
+            "target":"产地"
+        },
+        {
+            "source":"葡萄牙",
+            "target":"产地"
+        },
+        {
+            "source":"西班牙",
+            "target":"产地"
+        },
+        {
+            "source":"阿根廷",
+            "target":"产地"
+        },
+        {
+            "source":"中国",
+            "target":"产地"
+        },
+        {
+            "source":"加拿大",
+            "target":"产地"
+        },
+        {
+            "source":"南非",
+            "target":"产地"
+        },
+        {
+            "source":"德国",
+            "target":"产地"
+        },
+        {
+            "source":"意大利",
+            "target":"产地"
+        },
+        {
+            "source":"新西兰",
+            "target":"产地"
+        },
+        {
+            "source":"智利",
+            "target":"产地"
+        },
+        {
+            "source":"红葡萄酒",
+            "target":"分类"
+        },
+        {
+            "source":"白葡萄酒",
+            "target":"分类"
+        },
+        {
+            "source":"桃红葡萄酒",
+            "target":"分类"
+        },
+        {
+            "source":"果酒",
+            "target":"分类"
+        },
+        {
+            "source":"香槟",
+            "target":"分类"
+        },
+        {
+            "source":"起泡酒",
+            "target":"分类"
+        },
+        {
+            "source":"冰酒/贵腐/甜酒",
+            "target":"分类"
+        },
+        {
+            "source":"半干型",
+            "target":"甜度"
+        },
+        {
+            "source":"半甜型",
+            "target":"甜度"
+        },
+        {
+            "source":"干型",
+            "target":"甜度"
+        },
+        {
+            "source":"极干型",
+            "target":"甜度"
+        },
+        {
+            "source":"甜型",
+            "target":"甜度"
+        },
+        {
+            "source":"酒杯/酒具",
+            "target":"特性"
+        },
+        {
+            "source":"礼盒馈赠",
+            "target":"特性"
+        },
+        {
+            "source":"海外直采",
+            "target":"特性"
+        },
+        {
+            "source":"列级庄",
+            "target":"特性"
+        },
+        {
+            "source":"中级庄",
+            "target":"特性"
+        },
+        {
+            "source":"100-375ml",
+            "target":"容量"
+        },
+        {
+            "source":"376ml-750ml",
+            "target":"容量"
+        },
+        {
+            "source":"750ml以上",
+            "target":"容量"
+        },
+        {
+            "source":"黑皮诺（Pinot Noir）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"麝香(Muscat)",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"马尔贝克（Malbec）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"霞多丽（Chardonnay）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"雷司令（Riesling）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"长相思（Sauvignon Blanc）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"赤霞珠（Cabernet Sauvignon）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"赛美蓉(Semillon)",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"西拉/设拉子（Syrah/Shiraz）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"蛇龙珠（Cabernet Gernischet）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"莫斯卡托(Moscato)",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"皮诺塔吉（Pinotage）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"白诗南(Chenin Blanc)",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"灰皮诺(Pinot Gris)",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"混合(Blending)",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"歌海娜（Grenache）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"梅洛（Merlot）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"桑娇维塞（Sangiovese）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"天帕尼罗(Tempranillo)",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"品丽珠（Cabernet Franc）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"内比奥罗（Nebbiolo）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"佳美（Gamay）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"佳美娜（Carmenere）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"仙粉黛（Zinfandel）",
+            "target":"葡萄品种"
+        },
+        {
+            "source":"低泡酒",
+            "target":"类型"
+        },
+        {
+            "source":"无醇酒",
+            "target":"类型"
+        },
+        {
+            "source":"静止酒",
+            "target":"类型"
+        },
+        {
+            "source":"高泡酒",
+            "target":"类型"
+        },
+        {
+            "source":"中酸",
+            "target":"酸度"
+        },
+        {
+            "source":"低酸",
+            "target":"酸度"
+        },
+        {
+            "source":"高酸",
+            "target":"酸度"
+        }
+    ]
 }
