@@ -18,13 +18,17 @@ class KnowledgeGraph {
 
   init() {
     const { innerWidth, innerHeight } = window;
-    const { Scene, PerspectiveCamera, WebGLRenderer, FontLoader } = THREE;
+    const { Scene, PerspectiveCamera, WebGLRenderer, FontLoader, Raycaster, Vector2 } = THREE;
 
     this.scene = new Scene();
     this.camera = new PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
     this.renderer = new WebGLRenderer({
       canvas: document.getElementById('root'),
     });
+    this.raycaster = new Raycaster();
+
+    // 解析字体样式
+    this.font = new FontLoader().parse(fontJSON);
 
     // 设置相机位置
     this.camera.position.z = 200;
@@ -39,8 +43,11 @@ class KnowledgeGraph {
       this.renderer.render(this.scene, this.camera);
     });
 
-    // 解析字体样式
-    this.font = new FontLoader().parse(fontJSON);
+    // 添加事件绑定
+    this.mouse = new Vector2();
+
+    window.addEventListener('mousemove', this.handleMouseMove, false);
+    window.requestAnimationFrame(this.render);
   }
 
   drawLine = ({ color }) => {
@@ -118,6 +125,11 @@ class KnowledgeGraph {
     this.renderer.render(this.scene, this.camera);
   }
 
+  handleMouseMove = (e) => {
+    this.mouse.x = ((e.clientX / window.innerWidth) * 2) - 1;
+    this.mouse.y = -((e.clientY / window.innerHeight) * 2) + 1;
+  }
+
   parseData() {
     const simulation = d3.forceSimulation()
       .numDimensions(3)
@@ -151,6 +163,41 @@ class KnowledgeGraph {
         color: 0xffffff,
       });
     });
+  }
+
+  render = () => {
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+
+    // 获取交汇结点
+    const intersects = this.raycaster.intersectObjects(this.scene.children);
+
+    // 显示结点名称
+    if (intersects &&
+        intersects.length) {
+      Object.keys(this.names).forEach((name) => {
+        const text = this.names[name];
+
+        text.visible = false;
+      });
+    }
+
+    intersects.forEach((item) => {
+      const { object: node } = item;
+      const { type, name, position } = node;
+      const { x, y, z } = position;
+
+      if (type === 'Mesh' &&
+          name !== '') {
+        const text = this.names[name];
+
+        text.visible = true;
+        text.geometry.center();
+        text.position.set(x, y + 10, z);
+        text.lookAt(this.camera.position);
+      }
+    });
+
+    window.requestAnimationFrame(this.render);
   }
 }
 
