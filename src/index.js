@@ -1,11 +1,13 @@
 import * as d3 from 'd3-force-3d';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbit-controls';
+import fontJSON from '../font/data.json';
 
 import { nodes, links } from '../mock/data.json';
 
 class KnowledgeGraph {
   nodes = [];
+  names = {};
   lines = [];
 
   constructor() {
@@ -16,7 +18,7 @@ class KnowledgeGraph {
 
   init() {
     const { innerWidth, innerHeight } = window;
-    const { Scene, PerspectiveCamera, WebGLRenderer } = THREE;
+    const { Scene, PerspectiveCamera, WebGLRenderer, FontLoader } = THREE;
 
     this.scene = new Scene();
     this.camera = new PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
@@ -36,6 +38,9 @@ class KnowledgeGraph {
     controls.addEventListener('change', () => {
       this.renderer.render(this.scene, this.camera);
     });
+
+    // 解析字体样式
+    this.font = new FontLoader().parse(fontJSON);
   }
 
   drawLine = ({ color }) => {
@@ -52,7 +57,29 @@ class KnowledgeGraph {
     this.lines.push(line);
   }
 
-  drawSphere = ({ color }) => {
+  drawName = ({ name, color }) => {
+    const { Mesh, MeshBasicMaterial, TextGeometry } = THREE;
+    const { font } = this;
+
+    const geometry = new TextGeometry(name, {
+      font,
+      size: 5,
+      height: 0,
+    });
+
+    const material = new MeshBasicMaterial({
+      color,
+    });
+
+    const text = new Mesh(geometry, material);
+
+    text.visible = false;
+
+    this.scene.add(text);
+    this.names[name] = text;
+  }
+
+  drawSphere = ({ name, color }) => {
     const { Mesh, MeshBasicMaterial, SphereGeometry } = THREE;
 
     const geometry = new SphereGeometry(2.5, 10, 10);
@@ -62,6 +89,8 @@ class KnowledgeGraph {
     });
 
     const sphere = new Mesh(geometry, material);
+
+    sphere.name = name;
 
     this.scene.add(sphere);
     this.nodes.push(sphere);
@@ -103,8 +132,16 @@ class KnowledgeGraph {
   }
 
   startDraw() {
-    nodes.forEach(() => {
+    nodes.forEach((node) => {
+      const { id: name } = node;
+
+      this.drawName({
+        name,
+        color: 0xffffff,
+      });
+
       this.drawSphere({
+        name,
         color: 0xffffff,
       });
     });
