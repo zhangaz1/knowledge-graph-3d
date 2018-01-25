@@ -10,7 +10,8 @@ class KnowledgeGraph {
   names = {};
   lines = [];
 
-  isTickEnd = false;
+  isTimerStop = false;
+  displayName = null;
 
   constructor() {
     this.init();
@@ -126,37 +127,44 @@ class KnowledgeGraph {
   }
 
   handleRaycaster = () => {
+    const { scene, camera, mouse, raycaster, names, displayName } = this;
+
     // 更新光线投射
-    this.raycaster.setFromCamera(this.mouse, this.camera);
+    raycaster.setFromCamera(mouse, camera);
 
     // 获取交汇结点
-    const intersects = this.raycaster.intersectObjects(this.scene.children);
+    const intersects = raycaster.intersectObjects(scene.children);
 
     // 显示结点名称
-    if (intersects &&
-        intersects.length) {
-      Object.keys(this.names).forEach((name) => {
-        const text = this.names[name];
-
-        text.visible = false;
-      });
+    if (displayName) {
+      displayName.visible = false;
     }
 
-    intersects.forEach((item) => {
-      const { object: node } = item;
+    if (intersects &&
+        intersects.length) {
+      const { object: node } = intersects[0];
       const { type, name, position } = node;
-      const { x, y, z } = position;
 
       if (type === 'Mesh' &&
           name !== '') {
-        const text = this.names[name];
+        if (!names[name]) {
+          this.drawName({
+            name,
+            color: 0xffffff,
+          });
+        }
+
+        const text = names[name];
+        const { x, y, z } = position;
 
         text.visible = true;
         text.geometry.center();
         text.position.set(x, y + 10, z);
-        text.lookAt(this.camera.position);
+        text.lookAt(camera.position);
+
+        this.displayName = text;
       }
-    });
+    }
   }
 
   handleMouseMove = (e) => {
@@ -175,18 +183,13 @@ class KnowledgeGraph {
     simulation.force('link').links(links);
 
     simulation.on('end', () => {
-      this.isTickEnd = true;
+      this.isTimerStop = true;
     });
   }
 
   startDraw() {
     nodes.forEach((node) => {
       const { id: name } = node;
-
-      this.drawName({
-        name,
-        color: 0xffffff,
-      });
 
       this.drawSphere({
         name,
@@ -202,15 +205,15 @@ class KnowledgeGraph {
   }
 
   render = () => {
-    const { isTickEnd } = this;
+    const { scene, camera, renderer, isTimerStop } = this;
 
-    if (isTickEnd === false) {
+    if (isTimerStop === false) {
       this.handleTick();
     } else {
       this.handleRaycaster();
     }
 
-    this.renderer.render(this.scene, this.camera);
+    renderer.render(scene, camera);
 
     window.requestAnimationFrame(this.render);
   }
