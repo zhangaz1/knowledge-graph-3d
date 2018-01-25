@@ -10,6 +10,8 @@ class KnowledgeGraph {
   names = {};
   lines = [];
 
+  isTickEnd = false;
+
   constructor() {
     this.init();
     this.parseData();
@@ -121,51 +123,10 @@ class KnowledgeGraph {
       line.geometry.vertices[0] = new Vector3(source.x, source.y, source.z);
       line.geometry.vertices[1] = new Vector3(target.x, target.y, target.z);
     });
-
-    this.renderer.render(this.scene, this.camera);
   }
 
-  handleMouseMove = (e) => {
-    this.mouse.x = ((e.clientX / window.innerWidth) * 2) - 1;
-    this.mouse.y = -((e.clientY / window.innerHeight) * 2) + 1;
-  }
-
-  parseData() {
-    const simulation = d3.forceSimulation()
-      .numDimensions(3)
-      .force('link', d3.forceLink().id(d => d.id))
-      .force('center', d3.forceCenter())
-      .force('charge', d3.forceManyBody());
-
-    simulation.nodes(nodes);
-    simulation.force('link').links(links);
-
-    simulation.on('tick', this.handleTick);
-  }
-
-  startDraw() {
-    nodes.forEach((node) => {
-      const { id: name } = node;
-
-      this.drawName({
-        name,
-        color: 0xffffff,
-      });
-
-      this.drawSphere({
-        name,
-        color: 0xffffff,
-      });
-    });
-
-    links.forEach(() => {
-      this.drawLine({
-        color: 0xffffff,
-      });
-    });
-  }
-
-  render = () => {
+  handleRaycaster = () => {
+    // 更新光线投射
     this.raycaster.setFromCamera(this.mouse, this.camera);
 
     // 获取交汇结点
@@ -196,6 +157,60 @@ class KnowledgeGraph {
         text.lookAt(this.camera.position);
       }
     });
+  }
+
+  handleMouseMove = (e) => {
+    this.mouse.x = ((e.clientX / window.innerWidth) * 2) - 1;
+    this.mouse.y = -((e.clientY / window.innerHeight) * 2) + 1;
+  }
+
+  parseData() {
+    const simulation = d3.forceSimulation()
+      .numDimensions(3)
+      .force('link', d3.forceLink().id(d => d.id))
+      .force('center', d3.forceCenter())
+      .force('charge', d3.forceManyBody());
+
+    simulation.nodes(nodes);
+    simulation.force('link').links(links);
+
+    simulation.on('end', () => {
+      this.isTickEnd = true;
+    });
+  }
+
+  startDraw() {
+    nodes.forEach((node) => {
+      const { id: name } = node;
+
+      this.drawName({
+        name,
+        color: 0xffffff,
+      });
+
+      this.drawSphere({
+        name,
+        color: 0xffffff,
+      });
+    });
+
+    links.forEach(() => {
+      this.drawLine({
+        color: 0xffffff,
+      });
+    });
+  }
+
+  render = () => {
+    const { isTickEnd } = this;
+
+    if (isTickEnd === false) {
+      this.handleTick();
+    } else {
+      this.handleRaycaster();
+    }
+
+    this.renderer.render(this.scene, this.camera);
 
     window.requestAnimationFrame(this.render);
   }
