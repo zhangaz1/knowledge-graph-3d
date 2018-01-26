@@ -2,295 +2,295 @@
     "nodes":[
         {
             "id":"红酒",
-            "group":1
+            "group":0
         },
         {
             "id":"产地",
-            "group":2
+            "group":1
         },
         {
             "id":"分类",
-            "group":3
+            "group":2
         },
         {
             "id":"甜度",
-            "group":4
+            "group":3
         },
         {
             "id":"特性",
-            "group":5
+            "group":4
         },
         {
             "id":"容量",
-            "group":6
+            "group":5
         },
         {
             "id":"葡萄品种",
-            "group":7
+            "group":6
         },
         {
             "id":"类型",
-            "group":8
+            "group":7
         },
         {
             "id":"酸度",
-            "group":9
+            "group":8
         },
         {
             "id":"法国",
-            "group":2
+            "group":1
         },
         {
             "id":"澳大利亚",
-            "group":2
+            "group":1
         },
         {
             "id":"美国",
-            "group":2
+            "group":1
         },
         {
             "id":"葡萄牙",
-            "group":2
+            "group":1
         },
         {
             "id":"西班牙",
-            "group":2
+            "group":1
         },
         {
             "id":"阿根廷",
-            "group":2
+            "group":1
         },
         {
             "id":"中国",
-            "group":2
+            "group":1
         },
         {
             "id":"加拿大",
-            "group":2
+            "group":1
         },
         {
             "id":"南非",
-            "group":2
+            "group":1
         },
         {
             "id":"德国",
-            "group":2
+            "group":1
         },
         {
             "id":"意大利",
-            "group":2
+            "group":1
         },
         {
             "id":"新西兰",
-            "group":2
+            "group":1
         },
         {
             "id":"智利",
-            "group":2
+            "group":1
         },
         {
             "id":"红葡萄酒",
-            "group":3
+            "group":2
         },
         {
             "id":"白葡萄酒",
-            "group":3
+            "group":2
         },
         {
             "id":"桃红葡萄酒",
-            "group":3
+            "group":2
         },
         {
             "id":"果酒",
-            "group":3
+            "group":2
         },
         {
             "id":"香槟",
-            "group":3
+            "group":2
         },
         {
             "id":"起泡酒",
-            "group":3
+            "group":2
         },
         {
             "id":"冰酒/贵腐/甜酒",
-            "group":3
+            "group":2
         },
         {
             "id":"半干型",
-            "group":4
+            "group":3
         },
         {
             "id":"半甜型",
-            "group":4
+            "group":3
         },
         {
             "id":"干型",
-            "group":4
+            "group":3
         },
         {
             "id":"极干型",
-            "group":4
+            "group":3
         },
         {
             "id":"甜型",
-            "group":4
+            "group":3
         },
         {
             "id":"酒杯/酒具",
-            "group":5
+            "group":4
         },
         {
             "id":"礼盒馈赠",
-            "group":5
+            "group":4
         },
         {
             "id":"海外直采",
-            "group":5
+            "group":4
         },
         {
             "id":"列级庄",
-            "group":5
+            "group":4
         },
         {
             "id":"中级庄",
-            "group":5
+            "group":4
         },
         {
             "id":"100-375ml",
-            "group":6
+            "group":5
         },
         {
             "id":"376ml-750ml",
-            "group":6
+            "group":5
         },
         {
             "id":"750ml以上",
-            "group":6
+            "group":5
         },
         {
             "id":"黑皮诺（Pinot Noir）",
-            "group":7
+            "group":6
         },
         {
             "id":"麝香(Muscat)",
-            "group":7
+            "group":6
         },
         {
             "id":"马尔贝克（Malbec）",
-            "group":7
+            "group":6
         },
         {
             "id":"霞多丽（Chardonnay）",
-            "group":7
+            "group":6
         },
         {
             "id":"雷司令（Riesling）",
-            "group":7
+            "group":6
         },
         {
             "id":"长相思（Sauvignon Blanc）",
-            "group":7
+            "group":6
         },
         {
             "id":"赤霞珠（Cabernet Sauvignon）",
-            "group":7
+            "group":6
         },
         {
             "id":"赛美蓉(Semillon)",
-            "group":7
+            "group":6
         },
         {
             "id":"西拉/设拉子（Syrah/Shiraz）",
-            "group":7
+            "group":6
         },
         {
             "id":"蛇龙珠（Cabernet Gernischet）",
-            "group":7
+            "group":6
         },
         {
             "id":"莫斯卡托(Moscato)",
-            "group":7
+            "group":6
         },
         {
             "id":"皮诺塔吉（Pinotage）",
-            "group":7
+            "group":6
         },
         {
             "id":"白诗南(Chenin Blanc)",
-            "group":7
+            "group":6
         },
         {
             "id":"灰皮诺(Pinot Gris)",
-            "group":7
+            "group":6
         },
         {
             "id":"混合(Blending)",
-            "group":7
+            "group":6
         },
         {
             "id":"歌海娜（Grenache）",
-            "group":7
+            "group":6
         },
         {
             "id":"梅洛（Merlot）",
-            "group":7
+            "group":6
         },
         {
             "id":"桑娇维塞（Sangiovese）",
-            "group":7
+            "group":6
         },
         {
             "id":"天帕尼罗(Tempranillo)",
-            "group":7
+            "group":6
         },
         {
             "id":"品丽珠（Cabernet Franc）",
-            "group":7
+            "group":6
         },
         {
             "id":"内比奥罗（Nebbiolo）",
-            "group":7
+            "group":6
         },
         {
             "id":"佳美（Gamay）",
-            "group":7
+            "group":6
         },
         {
             "id":"佳美娜（Carmenere）",
-            "group":7
+            "group":6
         },
         {
             "id":"仙粉黛（Zinfandel）",
-            "group":7
+            "group":6
         },
         {
             "id":"低泡酒",
-            "group":8
+            "group":7
         },
         {
             "id":"无醇酒",
-            "group":8
+            "group":7
         },
         {
             "id":"静止酒",
-            "group":8
+            "group":7
         },
         {
             "id":"高泡酒",
-            "group":8
+            "group":7
         },
         {
             "id":"中酸",
-            "group":9
+            "group":8
         },
         {
             "id":"低酸",
-            "group":9
+            "group":8
         },
         {
             "id":"高酸",
-            "group":9
+            "group":8
         }
     ],
     "links":[

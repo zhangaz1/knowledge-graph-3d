@@ -1,11 +1,13 @@
 import * as d3 from 'd3-force-3d';
 import * as THREE from 'three';
+import randomColor from 'randomcolor';
 import OrbitControls from 'three-orbit-controls';
 import fontJSON from '../font/data.json';
 
 class KnowledgeGraph {
   nodes = [];
   links = [];
+  groups = [];
 
   spheres = [];
   lines = [];
@@ -98,10 +100,9 @@ class KnowledgeGraph {
   drawSphere = ({ name, color }) => {
     const { Mesh, MeshBasicMaterial, SphereGeometry } = THREE;
 
-    const geometry = new SphereGeometry(2.5, 10, 10);
+    const geometry = new SphereGeometry(4, 20, 20);
     const material = new MeshBasicMaterial({
       color,
-      wireframe: true,
     });
 
     const sphere = new Mesh(geometry, material);
@@ -110,6 +111,8 @@ class KnowledgeGraph {
 
     this.scene.add(sphere);
     this.spheres.push(sphere);
+
+    return sphere;
   }
 
   handleTick = () => {
@@ -197,20 +200,33 @@ class KnowledgeGraph {
   }
 
   startDraw() {
-    const { nodes, links } = this;
+    const { nodes, links, groups } = this;
 
     nodes.forEach((node) => {
-      const { id: name } = node;
+      const { id: name, group = 0 } = node;
 
-      this.drawSphere({
+      if (!groups[group]) {
+        const color = randomColor({
+          luminosity: 'light',
+        });
+
+        groups[group] = {
+          color,
+          spheres: [],
+        };
+      }
+
+      const sphere = this.drawSphere({
         name,
-        color: 0xffffff,
+        color: groups[group].color,
       });
+
+      groups[group].spheres.push(sphere);
     });
 
     links.forEach(() => {
       this.drawLine({
-        color: 0xffffff,
+        color: '#666666',
       });
     });
   }
