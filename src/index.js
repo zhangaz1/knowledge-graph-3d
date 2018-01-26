@@ -75,6 +75,9 @@ class KnowledgeGraph {
 
     // 设置渲染器尺寸
     this.renderer.setSize(innerWidth, innerHeight);
+
+    // 监听屏幕的缩放
+    window.addEventListener('resize', this.handleWindowResize, false);
   }
 
   drawLine = ({ color }) => {
@@ -196,6 +199,16 @@ class KnowledgeGraph {
   handleMouseMove = (e) => {
     this.mouse.x = ((e.clientX / window.innerWidth) * 2) - 1;
     this.mouse.y = -((e.clientY / window.innerHeight) * 2) + 1;
+  }
+
+  handleWindowResize = () => {
+    const { innerWidth, innerHeight } = window;
+    const { camera, renderer } = this;
+
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(innerWidth, innerHeight);
   }
 
   parseData() {
