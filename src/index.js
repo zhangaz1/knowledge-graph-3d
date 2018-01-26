@@ -31,6 +31,9 @@ class KnowledgeGraph {
     // 创建场景、相机、渲染器
     this.createScene();
 
+    // 添加光源
+    this.createLights();
+
     const { FontLoader, Raycaster, Vector2 } = THREE;
 
     this.raycaster = new Raycaster();
@@ -80,6 +83,17 @@ class KnowledgeGraph {
     window.addEventListener('resize', this.handleWindowResize, false);
   }
 
+  createLights() {
+    const { HemisphereLight, DirectionalLight } = THREE;
+    const { scene } = this;
+
+    const hemisphereLight = new HemisphereLight('#D9DBDB', '#F0F2F2', 0.9);
+    const directionalLight = new DirectionalLight('#FFFFFF', 0.9);
+
+    scene.add(hemisphereLight);
+    scene.add(directionalLight);
+  }
+
   drawLine = ({ color }) => {
     const { Line, LineBasicMaterial, Geometry } = THREE;
 
@@ -117,10 +131,10 @@ class KnowledgeGraph {
   }
 
   drawSphere = ({ name, color }) => {
-    const { Mesh, MeshBasicMaterial, SphereGeometry } = THREE;
+    const { Mesh, MeshPhongMaterial, SphereGeometry } = THREE;
 
     const geometry = new SphereGeometry(4, 20, 20);
-    const material = new MeshBasicMaterial({
+    const material = new MeshPhongMaterial({
       color,
     });
 
@@ -235,12 +249,8 @@ class KnowledgeGraph {
       const { id: name, group = 0 } = node;
 
       if (!groups[group]) {
-        const color = randomColor({
-          luminosity: 'light',
-        });
-
         groups[group] = {
-          color,
+          color: randomColor(),
           spheres: [],
         };
       }
@@ -255,7 +265,7 @@ class KnowledgeGraph {
 
     links.forEach(() => {
       this.drawLine({
-        color: '#666666',
+        color: '#CCCCCC',
       });
     });
   }
