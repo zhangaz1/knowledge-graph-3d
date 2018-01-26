@@ -3,17 +3,23 @@ import * as THREE from 'three';
 import OrbitControls from 'three-orbit-controls';
 import fontJSON from '../font/data.json';
 
-import { nodes, links } from '../mock/data.json';
-
 class KnowledgeGraph {
   nodes = [];
-  names = {};
+  links = [];
+
+  spheres = [];
   lines = [];
+  names = {};
 
   isTimerStop = false;
   displayName = null;
 
-  constructor() {
+  constructor({ data }) {
+    const { nodes, links } = data;
+
+    this.nodes = nodes;
+    this.links = links;
+
     this.init();
     this.parseData();
     this.startDraw();
@@ -103,15 +109,16 @@ class KnowledgeGraph {
     sphere.name = name;
 
     this.scene.add(sphere);
-    this.nodes.push(sphere);
+    this.spheres.push(sphere);
   }
 
   handleTick = () => {
     const { Vector3 } = THREE;
+    const { nodes, links } = this;
 
     nodes.forEach((node, idx) => {
       const { x, y, z } = node;
-      const sphere = this.nodes[idx];
+      const sphere = this.spheres[idx];
 
       sphere.position.set(x, y, z);
     });
@@ -173,6 +180,8 @@ class KnowledgeGraph {
   }
 
   parseData() {
+    const { nodes, links } = this;
+
     const simulation = d3.forceSimulation()
       .numDimensions(3)
       .force('link', d3.forceLink().id(d => d.id))
@@ -188,6 +197,8 @@ class KnowledgeGraph {
   }
 
   startDraw() {
+    const { nodes, links } = this;
+
     nodes.forEach((node) => {
       const { id: name } = node;
 
