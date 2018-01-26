@@ -28,24 +28,15 @@ class KnowledgeGraph {
   }
 
   init() {
-    const { innerWidth, innerHeight } = window;
-    const { Scene, PerspectiveCamera, WebGLRenderer, FontLoader, Raycaster, Vector2 } = THREE;
+    // 创建场景、相机、渲染器
+    this.createScene();
 
-    this.scene = new Scene();
-    this.camera = new PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
-    this.renderer = new WebGLRenderer({
-      canvas: document.getElementById('root'),
-    });
+    const { FontLoader, Raycaster, Vector2 } = THREE;
+
     this.raycaster = new Raycaster();
 
     // 解析字体样式
     this.font = new FontLoader().parse(fontJSON);
-
-    // 设置相机位置
-    this.camera.position.z = 200;
-
-    // 设置画布大小
-    this.renderer.setSize(innerWidth, innerHeight);
 
     // 添加轨道控制
     const controls = new (OrbitControls(THREE))(this.camera, this.renderer.domElement);
@@ -59,6 +50,31 @@ class KnowledgeGraph {
 
     window.addEventListener('mousemove', this.handleMouseMove, false);
     window.requestAnimationFrame(this.render);
+  }
+
+  createScene() {
+    const { innerWidth, innerHeight } = window;
+    const { Scene, PerspectiveCamera, WebGLRenderer } = THREE;
+
+    // 创建场景
+    this.scene = new Scene();
+
+    // 创建相机
+    this.camera = new PerspectiveCamera(60, innerWidth / innerHeight, 1, 1000);
+
+    // 设置相机位置
+    this.camera.position.x = 0;
+    this.camera.position.y = 0;
+    this.camera.position.z = 200;
+
+    // 创建渲染器
+    this.renderer = new WebGLRenderer({
+      alpha: true,
+      canvas: document.getElementById('root'),
+    });
+
+    // 设置渲染器尺寸
+    this.renderer.setSize(innerWidth, innerHeight);
   }
 
   drawLine = ({ color }) => {
