@@ -91,6 +91,8 @@ class KnowledgeGraph {
     const hemisphereLight = new HemisphereLight('#D9DBDB', '#F0F2F2', 0.9);
     const directionalLight = new DirectionalLight('#FFFFFF', 0.9);
 
+    directionalLight.position.set(150, 350, 350);
+
     scene.add(hemisphereLight);
     scene.add(directionalLight);
   }
