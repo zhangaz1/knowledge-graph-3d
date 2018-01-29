@@ -16,11 +16,21 @@ class KnowledgeGraph {
   isTimerStop = false;
   displayName = null;
 
-  constructor({ data }) {
+  maxLevel;
+  minRadius;
+  maxRadius;
+
+  constructor({ data, minRadius, maxRadius }) {
     const { nodes, links } = data;
 
     this.nodes = nodes;
     this.links = links;
+
+    const { level = 1 } = nodes[0];
+
+    this.maxLevel = level;
+    this.minRadius = minRadius;
+    this.maxRadius = maxRadius;
 
     this.init();
     this.parseData();
@@ -133,10 +143,13 @@ class KnowledgeGraph {
     this.names[name] = text;
   }
 
-  drawSphere = ({ name, color }) => {
+  drawSphere = ({ name, color, level }) => {
     const { Mesh, MeshPhongMaterial, SphereGeometry } = THREE;
+    const { maxLevel, minRadius, maxRadius } = this;
 
-    const geometry = new SphereGeometry(4, 20, 20);
+    const radius = minRadius + (((maxRadius - minRadius) / (maxLevel - 1)) * (level - 1));
+
+    const geometry = new SphereGeometry(radius, 20, 20);
     const material = new MeshPhongMaterial({
       color,
     });
@@ -249,7 +262,7 @@ class KnowledgeGraph {
     const { nodes, links, groups } = this;
 
     nodes.forEach((node) => {
-      const { id: name, group = 0 } = node;
+      const { id: name, group = 1, level = 1 } = node;
 
       if (!groups[group]) {
         groups[group] = {
@@ -261,6 +274,7 @@ class KnowledgeGraph {
       const sphere = this.drawSphere({
         name,
         color: groups[group].color,
+        level,
       });
 
       groups[group].spheres.push(sphere);
