@@ -72,8 +72,9 @@ class KnowledgeGraph {
 
     // 创建渲染器
     this.renderer = new WebGLRenderer({
-      alpha: true,
       canvas: document.getElementById('root'),
+      alpha: true,
+      antialias: true,
     });
 
     // 设置渲染器尺寸
