@@ -42,8 +42,11 @@ class KnowledgeGraph {
     // 创建场景、相机、渲染器
     this.createScene();
 
-    // 添加光源
+    // 创建光源
     this.createLights();
+
+    // 添加轨道控制
+    this.addControls();
 
     const { FontLoader, Raycaster, Vector2 } = THREE;
 
@@ -51,13 +54,6 @@ class KnowledgeGraph {
 
     // 解析字体样式
     this.font = new FontLoader().parse(fontJSON);
-
-    // 添加轨道控制
-    const controls = new (OrbitControls(THREE))(this.camera, this.renderer.domElement);
-
-    controls.addEventListener('change', () => {
-      this.renderer.render(this.scene, this.camera);
-    });
 
     // 添加事件绑定
     this.mouse = new Vector2();
@@ -106,6 +102,16 @@ class KnowledgeGraph {
 
     scene.add(hemisphereLight);
     scene.add(directionalLight);
+  }
+
+  addControls() {
+    const { scene, camera, renderer } = this;
+
+    const controls = new (OrbitControls(THREE))(camera, renderer.domElement);
+
+    controls.addEventListener('change', () => {
+      renderer.render(scene, camera);
+    });
   }
 
   drawLine = ({ color }) => {
