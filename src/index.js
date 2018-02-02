@@ -1,13 +1,14 @@
 import * as d3 from 'd3-force-3d';
 import * as THREE from 'three';
-import randomColor from 'randomcolor';
 import OrbitControls from 'three-orbit-controls';
+import Colors from './colors';
 import fontJSON from '../font/data.json';
 
 class KnowledgeGraph {
   nodes = [];
   links = [];
   groups = [];
+  colors = Colors;
 
   spheres = [];
   lines = [];
@@ -151,7 +152,7 @@ class KnowledgeGraph {
 
     const geometry = new SphereGeometry(radius, 20, 20);
     const material = new MeshPhongMaterial({
-      color,
+      color: color[level],
     });
 
     const sphere = new Mesh(geometry, material);
@@ -259,14 +260,14 @@ class KnowledgeGraph {
   }
 
   startDraw() {
-    const { nodes, links, groups } = this;
+    const { nodes, links, groups, colors } = this;
 
     nodes.forEach((node) => {
       const { id: name, group = 1, level = 1 } = node;
 
       if (!groups[group]) {
         groups[group] = {
-          color: randomColor(),
+          color: colors[group - 1],
           spheres: [],
         };
       }
